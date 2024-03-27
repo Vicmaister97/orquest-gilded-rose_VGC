@@ -29,7 +29,8 @@ public class GildedRoseTest {
                 new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 6, 20),
                 // this conjured item does not work properly yet
-                new Item("Conjured Mana Cake", 3, 6)
+                new Item("Conjured Mana Cake", 3, 6),
+                new Item("Conjured Mana Cake", 0, 6)
         };
         gildedRose = new GildedRose(items);
     }
@@ -242,6 +243,59 @@ public class GildedRoseTest {
         assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
         assertEquals(-1, backstageItem.sellIn);
         assertEquals(0, backstageItem.quality);
+    }
+
+    /**
+     * Tests the updateQuality method for a Conjured item.
+     */
+    @Test
+    public void testUpdateQuality_ConjuredItem() {
+        // Given
+        int conjuredIndex = 7;
+        Item conjuredItem = gildedRose.items[conjuredIndex];
+
+        // When
+        gildedRose.updateQuality();
+
+        // Then
+        assertEquals("Conjured Mana Cake", conjuredItem.name);
+        assertEquals(2, conjuredItem.sellIn);
+        assertEquals(4, conjuredItem.quality);
+
+        // When
+        gildedRose.updateQuality();
+
+        // Then
+        assertEquals("Conjured Mana Cake", conjuredItem.name);
+        assertEquals(1, conjuredItem.sellIn);
+        assertEquals(2, conjuredItem.quality);
+    }
+
+    /**
+     * Tests the updateQuality method for a Conjured item out of date.
+     */
+    @Test
+    public void testUpdateQuality_ConjuredItemOutOfDate() {
+        // Given
+        int conjuredIndex = 8;
+        Item conjuredItem = gildedRose.items[conjuredIndex];
+
+        // When
+        gildedRose.updateQuality();
+
+        // Then
+        assertEquals("Conjured Mana Cake", conjuredItem.name);
+        assertEquals(-1, conjuredItem.sellIn);
+        assertEquals(2, conjuredItem.quality);
+
+        // When
+        gildedRose.updateQuality();
+
+        // Then
+        assertEquals("Conjured Mana Cake", conjuredItem.name);
+        assertEquals(-2, conjuredItem.sellIn);
+        assertEquals(0, conjuredItem.quality);
+
     }
 
 }
