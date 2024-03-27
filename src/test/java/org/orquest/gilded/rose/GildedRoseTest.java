@@ -2,7 +2,6 @@ package org.orquest.gilded.rose;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.RegisterExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -36,27 +35,31 @@ public class GildedRoseTest {
     }
 
 
+    /**
+     * Tests the updateQuality method for a normal item
+     */
     @Test
     public void testUpdateQuality_NormalItem() {
+
         // Given
-        int normalItemIndex = 0;
-        Item normalItem = items[normalItemIndex];
+        int indexItem = 0;
+        Item normalItem = gildedRose.items[indexItem];
 
         // When
         gildedRose.updateQuality();
 
         // Then
-        assertEquals("+5 Dexterity Vest", gildedRose.items[normalItemIndex].name);
-        assertEquals(9, gildedRose.items[normalItemIndex].sellIn);
-        assertEquals(19, gildedRose.items[normalItemIndex].quality);
+        assertEquals("+5 Dexterity Vest", normalItem.name);
+        assertEquals(9, normalItem.sellIn);
+        assertEquals(19, normalItem.quality);
 
         // When
         gildedRose.updateQuality();
 
         // Then
-        assertEquals("+5 Dexterity Vest", gildedRose.items[normalItemIndex].name);
-        assertEquals(8, gildedRose.items[normalItemIndex].sellIn);
-        assertEquals(18, gildedRose.items[normalItemIndex].quality);
+        assertEquals("+5 Dexterity Vest", normalItem.name);
+        assertEquals(8, normalItem.sellIn);
+        assertEquals(18, normalItem.quality);
     }
 
     /**
@@ -64,157 +67,169 @@ public class GildedRoseTest {
      */
     @Test
     public void testUpdateQuality_NormalItemOutOfDate() {
+
         // Given
-        int normalItemIndex = 2;
-        Item normalItem = items[normalItemIndex];
+        int indexItem = 2;
+        Item normalItem = gildedRose.items[indexItem];
 
         // When
         gildedRose.updateQuality();
 
         // Then
-        assertEquals("Elixir of the Mongoose", gildedRose.items[normalItemIndex].name);
-        assertEquals(-1, gildedRose.items[normalItemIndex].sellIn);
-        assertEquals(6, gildedRose.items[normalItemIndex].quality);
+        assertEquals("Elixir of the Mongoose", normalItem.name);
+        assertEquals(-1, normalItem.sellIn);
+        assertEquals(6, normalItem.quality);
 
         // When
         gildedRose.updateQuality();
 
         // Then
-        assertEquals("Elixir of the Mongoose", gildedRose.items[normalItemIndex].name);
-        assertEquals(-2, gildedRose.items[normalItemIndex].sellIn);
-        assertEquals(4, gildedRose.items[normalItemIndex].quality);
-    }
-
-    @Test
-    public void testUpdateQuality_AgedBrie() {
-        // Given
-        int agedBrieIndex = 1;
-        Item normalItem = items[agedBrieIndex];
-
-        // When
-        gildedRose.updateQuality();
-
-        // Then
-        assertEquals("Aged Brie", gildedRose.items[agedBrieIndex].name);
-        assertEquals(1, gildedRose.items[agedBrieIndex].sellIn);
-        assertEquals(1, gildedRose.items[agedBrieIndex].quality);
-
-        // When
-        gildedRose.updateQuality();
-
-        // Then
-        assertEquals("Aged Brie", gildedRose.items[agedBrieIndex].name);
-        assertEquals(0, gildedRose.items[agedBrieIndex].sellIn);
-        assertEquals(2, gildedRose.items[agedBrieIndex].quality);
-
-        // When
-        gildedRose.updateQuality();
-
-        // Then
-        assertEquals("Aged Brie", gildedRose.items[agedBrieIndex].name);
-        assertEquals(-1, gildedRose.items[agedBrieIndex].sellIn);
-        assertEquals(4, gildedRose.items[agedBrieIndex].quality);
-    }
-
-    @Test
-    public void testUpdateQuality_LegendaryItem() {
-        // Given
-        int legendaryItemIndex = 3;
-        Item normalItem = items[legendaryItemIndex];
-
-        // When
-        gildedRose.updateQuality();
-
-        // Then
-        assertEquals("Sulfuras, Hand of Ragnaros", gildedRose.items[legendaryItemIndex].name);
-        assertEquals(0, gildedRose.items[legendaryItemIndex].sellIn);
-        assertEquals(80, gildedRose.items[legendaryItemIndex].quality);
-
-        // When
-        gildedRose.updateQuality();
-
-        // Then
-        assertEquals("Sulfuras, Hand of Ragnaros", gildedRose.items[legendaryItemIndex].name);
-        assertEquals(0, gildedRose.items[legendaryItemIndex].sellIn);
-        assertEquals(80, gildedRose.items[legendaryItemIndex].quality);
+        assertEquals("Elixir of the Mongoose", normalItem.name);
+        assertEquals(-2, normalItem.sellIn);
+        assertEquals(4, normalItem.quality);
     }
 
     /**
-     * Tests the updateQuality method for a backstage ticket for the condition of less than 10 days.
+     * Tests the updateQuality method for an Aged Bried item
+     */
+    @Test
+    public void testUpdateQuality_AgedBrie() {
+
+        // Given
+        int agedBrieIndex = 1;
+        Item agedBrieItem = gildedRose.items[agedBrieIndex];
+
+        // When
+        gildedRose.updateQuality();
+
+        // Then
+        assertEquals("Aged Brie", agedBrieItem.name);
+        assertEquals(1, agedBrieItem.sellIn);
+        assertEquals(1, agedBrieItem.quality);
+
+        // When
+        gildedRose.updateQuality();
+
+        // Then
+        assertEquals("Aged Brie", agedBrieItem.name);
+        assertEquals(0, agedBrieItem.sellIn);
+        assertEquals(2, agedBrieItem.quality);
+
+        // When
+        gildedRose.updateQuality();
+
+        // Then
+        assertEquals("Aged Brie", agedBrieItem.name);
+        assertEquals(-1, agedBrieItem.sellIn);
+        assertEquals(4, agedBrieItem.quality);
+    }
+
+    /**
+     * Tests the updateQuality method for a Legendary item
+     */
+    @Test
+    public void testUpdateQuality_LegendaryItem() {
+
+        // Given
+        int legendaryItemIndex = 3;
+        Item legendaryItemItem = gildedRose.items[legendaryItemIndex];
+
+        // When
+        gildedRose.updateQuality();
+
+        // Then
+        assertEquals("Sulfuras, Hand of Ragnaros", legendaryItemItem.name);
+        assertEquals(0, legendaryItemItem.sellIn);
+        assertEquals(80, legendaryItemItem.quality);
+
+        // When
+        gildedRose.updateQuality();
+
+        // Then
+        assertEquals("Sulfuras, Hand of Ragnaros", legendaryItemItem.name);
+        assertEquals(0, legendaryItemItem.sellIn);
+        assertEquals(80, legendaryItemItem.quality);
+    }
+
+    /**
+     * Tests the updateQuality method for a backstage ticket in the condition of less than 10 days.
      */
     @Test
     public void testUpdateQuality_BackstageItemLessThan10Days() {
+
         // Given
         int backstageItemIndex = 4;
-        Item normalItem = items[backstageItemIndex];
+        Item backstageItem = gildedRose.items[backstageItemIndex];
 
         // When
         gildedRose.updateQuality();
 
         // Then
-        assertEquals("Backstage passes to a TAFKAL80ETC concert", gildedRose.items[backstageItemIndex].name);
-        assertEquals(10, gildedRose.items[backstageItemIndex].sellIn);
-        assertEquals(21, gildedRose.items[backstageItemIndex].quality);
+        assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
+        assertEquals(10, backstageItem.sellIn);
+        assertEquals(21, backstageItem.quality);
 
         // When
         gildedRose.updateQuality();
 
         // Then
-        assertEquals("Backstage passes to a TAFKAL80ETC concert", gildedRose.items[backstageItemIndex].name);
-        assertEquals(9, gildedRose.items[backstageItemIndex].sellIn);
-        assertEquals(23, gildedRose.items[backstageItemIndex].quality);
+        assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
+        assertEquals(9, backstageItem.sellIn);
+        assertEquals(23, backstageItem.quality);
     }
 
     /**
-     * Tests the updateQuality method for a backstage ticket for the condition of less than 5 days.
+     * Tests the updateQuality method for a backstage ticket in the condition of less than 5 days.
      */
     @Test
     public void testUpdateQuality_BackstageItemLessThan5Days() {
+
         // Given
         int backstageItemIndex = 5;
-        Item normalItem = items[backstageItemIndex];
+        Item backstageItem = gildedRose.items[backstageItemIndex];
 
         // When
         gildedRose.updateQuality();
 
         // Then
-        assertEquals("Backstage passes to a TAFKAL80ETC concert", gildedRose.items[backstageItemIndex].name);
-        assertEquals(9, gildedRose.items[backstageItemIndex].sellIn);
-        assertEquals(50, gildedRose.items[backstageItemIndex].quality);
+        assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
+        assertEquals(9, backstageItem.sellIn);
+        assertEquals(50, backstageItem.quality);
 
         // When
         gildedRose.updateQuality();
 
         // Then
-        assertEquals("Backstage passes to a TAFKAL80ETC concert", gildedRose.items[backstageItemIndex].name);
-        assertEquals(8, gildedRose.items[backstageItemIndex].sellIn);
-        assertEquals(50, gildedRose.items[backstageItemIndex].quality);
+        assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
+        assertEquals(8, backstageItem.sellIn);
+        assertEquals(50, backstageItem.quality);
     }
 
     /**
-     * Tests the updateQuality method for a backstage ticket for the condition of being out of date.
+     * Tests the updateQuality method for a backstage ticket in the condition of being out of date.
      */
     @Test
     public void testUpdateQuality_BackstageItemOutOfDate() {
+
         // Given
         int backstageItemIndex = 6;
-        Item normalItem = items[backstageItemIndex];
+        Item backstageItem = gildedRose.items[backstageItemIndex];
 
         // When
         gildedRose.updateQuality();
 
         // Then
-        assertEquals("Backstage passes to a TAFKAL80ETC concert", gildedRose.items[backstageItemIndex].name);
-        assertEquals(5, gildedRose.items[backstageItemIndex].sellIn);
-        assertEquals(22, gildedRose.items[backstageItemIndex].quality);
+        assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
+        assertEquals(5, backstageItem.sellIn);
+        assertEquals(22, backstageItem.quality);
 
         // When
         gildedRose.updateQuality();
 
         // Then
-        assertEquals("Backstage passes to a TAFKAL80ETC concert", gildedRose.items[backstageItemIndex].name);
-        assertEquals(4, gildedRose.items[backstageItemIndex].sellIn);
-        assertEquals(25, gildedRose.items[backstageItemIndex].quality);
+        assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
+        assertEquals(4, backstageItem.sellIn);
+        assertEquals(25, backstageItem.quality);
 
         // When
         gildedRose.updateQuality();
@@ -224,9 +239,9 @@ public class GildedRoseTest {
         gildedRose.updateQuality();
 
         // Then
-        assertEquals("Backstage passes to a TAFKAL80ETC concert", gildedRose.items[backstageItemIndex].name);
-        assertEquals(-1, gildedRose.items[backstageItemIndex].sellIn);
-        assertEquals(0, gildedRose.items[backstageItemIndex].quality);
+        assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
+        assertEquals(-1, backstageItem.sellIn);
+        assertEquals(0, backstageItem.quality);
     }
 
 }
