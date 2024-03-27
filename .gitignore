@@ -1,0 +1,4 @@
+/build/reports/*
+/build/classes/*
+/build/tmp/*
+/build/test-results/*
