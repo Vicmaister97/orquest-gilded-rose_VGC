@@ -2,31 +2,30 @@
 
 Esto es un fork de la conocida [kata de Gilded Rose ](https://github.com/emilybache/GildedRose-Refactoring-Kata/)para simplificar su descarga.
 
-**¿Qué esperamos de la prueba?**
-Solo queremos mantener una conversación contigo sobre programación, para ello lo más fácil es tener un código en común.
+## My simple solution
 
-- ¿Cómo solucionarías el problema?
-- ¿Qué técnicas aplicarías?
-- ¿Qué consideras que se puede mejorar del código?
-- ¿Testing?
+La solución planteada es la más sencilla posible que modifica lo mínimo el código original.
 
-**¿Qué te recomendamos hacer en la prueba?**
-Tanto si vienes a la prueba de live coding como si has optado por realizar la prueba tranquilamente por separado te recomendamos que entregues algo **con lo que te sientas comoda**. 
+El planteamiento ha sido tener una solución rápida con las mínimas modificaciones posibles
+que resulta viable en múltiples use cases, véase solucionar un bug, añadir un requerimiento en
+un sistema complejo bien estructurado, etc.
 
-El ejercicio propuesto es una modificación que podrías tener lista en poco tiempo. Sin embargo, sabemos que el código tiene bastante margen de mejora, ¿nos ayudas?. 
+Se han creado los **tests antes de la implementación del nuevo requerimiento** para
+asegurar que en la modificación del código se mantiene el comportamiento original.
+Ésto también nos asegura que en las sucesivas refactorizaciones de código y su
+ciclo de vida, el comportamiento básico del sistema no se vea alterado de forma inintencionada.
 
-Por favor, no inviertas demasiado tiempo, queremos conversar y aprender como resuelves problemas desde un código común, pero lo que entregues no tiene que estar perfecto, pero si mostrarnos que tipo de codigo haces en tu día a día y que mejoras incluirías.
+## Run TESTs
 
-**Recomendaciones:**
-- Haz un readme para contarnos qué te ha parecido, qué decisiones has tomado y qué harías si dedicaras más tiempo o si quisieras mejorar algo.
-- Has test
-- Ordena el código, hay muchas cosas que mejorar ahí
-- Busca enseñarnos como programas en tu día a día
-- Nos gustan los test, las buenas practicas, SOLID, KISS, etc
-- Disfruta, si dejar de hacerlo para y charla con nosotros de ello.
+La clase GildedRoseTest contiene los tests unitarios del sistema (clase GildedRose)
 
-**¿Qué plazo tengo para entregar una prueba por separado?**
-Si vas a entregar una prueba desde casa, te agradeceríamos que nos enseñaras el código al menos un día antes para poder garantizarte un feedback de calidad en la propia entrevista, pero no es condición necesaria. La opción perfecta para entregar es compartirnos un enlace a un repositorio publico de git con el código, así también podemos ver como usas los commit para documentar :).
+```
+./gradlew test
+```
+
+Los resultados pueden visualizarse en la ruta /build/reports/tests/test/index.html
+
+
 
 ## Run the TextTest Fixture from Command-Line
 
