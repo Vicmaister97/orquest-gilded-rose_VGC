@@ -7,12 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for the {@link org.orquest.gilded.rose.GildedRose} class.
- * @author Vicotr Garcia Carrera
+ * @author Victor Garcia Carrera
  * @since 27 march 2024
  */
 public class GildedRoseTest {
 
-    private Item[] items;
     private GildedRose gildedRose;
 
     /**
@@ -20,7 +19,7 @@ public class GildedRoseTest {
      */
     @BeforeEach
     public void setUp () {
-        items = new Item[] {
+        Item[] items = new Item[] {
                 new Item("+5 Dexterity Vest", 10, 20), //
                 new Item("Aged Brie", 2, 0), //
                 new Item("Elixir of the Mongoose", 0, 8), //
@@ -68,7 +67,6 @@ public class GildedRoseTest {
      */
     @Test
     public void testUpdateQuality_NormalItemOutOfDate() {
-
         // Given
         int indexItem = 2;
         Item normalItem = gildedRose.items[indexItem];
@@ -95,7 +93,6 @@ public class GildedRoseTest {
      */
     @Test
     public void testUpdateQuality_AgedBrie() {
-
         // Given
         int agedBrieIndex = 1;
         Item agedBrieItem = gildedRose.items[agedBrieIndex];
@@ -130,7 +127,6 @@ public class GildedRoseTest {
      */
     @Test
     public void testUpdateQuality_LegendaryItem() {
-
         // Given
         int legendaryItemIndex = 3;
         Item legendaryItemItem = gildedRose.items[legendaryItemIndex];
@@ -157,7 +153,6 @@ public class GildedRoseTest {
      */
     @Test
     public void testUpdateQuality_BackstageItemLessThan10Days() {
-
         // Given
         int backstageItemIndex = 4;
         Item backstageItem = gildedRose.items[backstageItemIndex];
@@ -184,7 +179,6 @@ public class GildedRoseTest {
      */
     @Test
     public void testUpdateQuality_BackstageItemLessThan5Days() {
-
         // Given
         int backstageItemIndex = 5;
         Item backstageItem = gildedRose.items[backstageItemIndex];
@@ -211,7 +205,6 @@ public class GildedRoseTest {
      */
     @Test
     public void testUpdateQuality_BackstageItemOutOfDate() {
-
         // Given
         int backstageItemIndex = 6;
         Item backstageItem = gildedRose.items[backstageItemIndex];
