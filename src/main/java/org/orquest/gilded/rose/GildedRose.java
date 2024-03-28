@@ -1,7 +1,5 @@
 package org.orquest.gilded.rose;
 
-import java.util.*;
-
 class GildedRose {
     Item[] items;
 

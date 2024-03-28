@@ -1,4 +1,9 @@
-/build/reports/*
-/build/classes/*
-/build/tmp/*
-/build/test-results/*
+# Gradle files
+build/
+.gradle/
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+*.iws
+*.ipr
