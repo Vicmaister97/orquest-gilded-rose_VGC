@@ -1,10 +1,27 @@
 package org.orquest.gilded.rose;
 
+/**
+ * GildedRose class in charge of managing the inventory system of GildedRose Inn.
+ * @author Victor Garcia Carrera
+ * @since 28 march 2024
+ */
+
 class GildedRose {
-    Item[] items;
+
+    private Item[] items;
 
     public GildedRose(Item[] items) {
         this.items = items;
+    }
+
+    /**
+     * This method returns the corresponding item from items property
+     *  given the corresponding index of that item.
+     * @param indexItem index
+     * @return Item instance
+     */
+    public Item getItem (int indexItem) {
+        return items[indexItem];
     }
 
     public void updateQuality() {

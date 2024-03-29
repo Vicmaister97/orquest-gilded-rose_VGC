@@ -43,7 +43,7 @@ public class GildedRoseTest {
 
         // Given
         int indexItem = 0;
-        Item normalItem = gildedRose.items[indexItem];
+        Item normalItem = gildedRose.getItem(indexItem);
 
         // When
         gildedRose.updateQuality();
@@ -69,7 +69,7 @@ public class GildedRoseTest {
     public void testUpdateQuality_NormalItemOutOfDate() {
         // Given
         int indexItem = 2;
-        Item normalItem = gildedRose.items[indexItem];
+        Item normalItem = gildedRose.getItem(indexItem);
 
         // When
         gildedRose.updateQuality();
@@ -95,7 +95,7 @@ public class GildedRoseTest {
     public void testUpdateQuality_AgedBrie() {
         // Given
         int agedBrieIndex = 1;
-        Item agedBrieItem = gildedRose.items[agedBrieIndex];
+        Item agedBrieItem = gildedRose.getItem(agedBrieIndex);
 
         // When
         gildedRose.updateQuality();
@@ -129,7 +129,7 @@ public class GildedRoseTest {
     public void testUpdateQuality_LegendaryItem() {
         // Given
         int legendaryItemIndex = 3;
-        Item legendaryItemItem = gildedRose.items[legendaryItemIndex];
+        Item legendaryItemItem = gildedRose.getItem(legendaryItemIndex);
 
         // When
         gildedRose.updateQuality();
@@ -155,7 +155,7 @@ public class GildedRoseTest {
     public void testUpdateQuality_BackstageItemLessThan10Days() {
         // Given
         int backstageItemIndex = 4;
-        Item backstageItem = gildedRose.items[backstageItemIndex];
+        Item backstageItem = gildedRose.getItem(backstageItemIndex);
 
         // When
         gildedRose.updateQuality();
@@ -181,7 +181,7 @@ public class GildedRoseTest {
     public void testUpdateQuality_BackstageItemLessThan5Days() {
         // Given
         int backstageItemIndex = 5;
-        Item backstageItem = gildedRose.items[backstageItemIndex];
+        Item backstageItem = gildedRose.getItem(backstageItemIndex);
 
         // When
         gildedRose.updateQuality();
@@ -207,7 +207,7 @@ public class GildedRoseTest {
     public void testUpdateQuality_BackstageItemOutOfDate() {
         // Given
         int backstageItemIndex = 6;
-        Item backstageItem = gildedRose.items[backstageItemIndex];
+        Item backstageItem = gildedRose.getItem(backstageItemIndex);
 
         // When
         gildedRose.updateQuality();
@@ -245,7 +245,7 @@ public class GildedRoseTest {
     public void testUpdateQuality_ConjuredItem() {
         // Given
         int conjuredIndex = 7;
-        Item conjuredItem = gildedRose.items[conjuredIndex];
+        Item conjuredItem = gildedRose.getItem(conjuredIndex);
 
         // When
         gildedRose.updateQuality();
@@ -271,7 +271,7 @@ public class GildedRoseTest {
     public void testUpdateQuality_ConjuredItemOutOfDate() {
         // Given
         int conjuredIndex = 8;
-        Item conjuredItem = gildedRose.items[conjuredIndex];
+        Item conjuredItem = gildedRose.getItem(conjuredIndex);
 
         // When
         gildedRose.updateQuality();
