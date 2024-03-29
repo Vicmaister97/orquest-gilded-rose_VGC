@@ -2,6 +2,7 @@ package org.orquest.gilded.rose;
 
 /**
  * GildedRose class in charge of managing the inventory system of GildedRose Inn.
+ *
  * @author Victor Garcia Carrera
  * @since 28 march 2024
  */
@@ -17,8 +18,9 @@ class GildedRose {
     /**
      * This method returns the corresponding item from items property
      *  given the corresponding index of that item.
-     * @param indexItem index
-     * @return Item instance
+     *
+     * @param indexItem the corresponding index of the item in items
+     * @return Item that corresponds to indexItem reference
      */
     public Item getItem (int indexItem) {
         return items[indexItem];
@@ -72,9 +74,9 @@ class GildedRose {
                                     item.quality = item.quality - 1;
                                 }
                             }
+                        } else {
+                            item.quality = 0;
                         }
-                    } else {
-                        item.quality = 0;
                     }
                 } else {
                     if (item.quality < 50) {

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for the {@link org.orquest.gilded.rose.GildedRose} class.
+ *
  * @author Victor Garcia Carrera
  * @since 27 march 2024
  */
