@@ -7,11 +7,11 @@ import java.util.EnumSet;
  * type of item in {@link org.orquest.gilded.rose.GildedRose} class.
  *
  * @author Victor Garcia Carrera
- * @since 27 march 2024
+ * @since 29 march 2024
  */
 public enum ItemType {
     AGED_BRIE("Aged Brie"),
-    LEGENDARY("Legendary"),
+    SULFURAS("Sulfuras"),
     BACKSTAGE("Backstage"),
     CONJURED("Conjured"),
     DEFAULT("Normal");
@@ -33,7 +33,7 @@ public enum ItemType {
      * @param itemName is the name of the Item which we want to obtain it's ItemType
      * @return ItemType value for the corresponding itemName
      */
-    public ItemType findByItemName (String itemName) {
+    public static ItemType findByItemName (String itemName) {
         return EnumSet.allOf(ItemType.class)
                 .stream()
                 .filter(itemType -> formatString(itemName).contains(formatString(itemType.getType())))
@@ -48,7 +48,7 @@ public enum ItemType {
      * @param original String to be formatted to properly obtain the ItemType of an Item
      * @return String with only alphabet characters in lowercase
      */
-    private String formatString (String original) {
+    private static String formatString(String original) {
         return original.replaceAll("[^a-zA-Z]", "").toLowerCase();
     }
 

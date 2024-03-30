@@ -28,11 +28,11 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            if (!item.name.equals("Aged Brie")
-                    && !item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            ItemType itemType = ItemType.findByItemName(item.name);
+            if (!itemType.equals(ItemType.AGED_BRIE) && !itemType.equals(ItemType.BACKSTAGE)) {
                 if (item.quality > 0) {
-                    if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                        if (item.name.equals("Conjured Mana Cake")) {
+                    if (!itemType.equals(ItemType.SULFURAS)) {
+                        if (itemType.equals(ItemType.CONJURED)) {
                             item.quality = item.quality - 2;
                         } else {
                             item.quality = item.quality - 1;
@@ -43,7 +43,7 @@ class GildedRose {
                 if (item.quality < 50) {
                     item.quality = item.quality + 1;
 
-                    if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                    if (itemType.equals(ItemType.BACKSTAGE)) {
                         if (item.sellIn < 11) {
                             if (item.quality < 50) {
                                 item.quality = item.quality + 1;
@@ -59,16 +59,16 @@ class GildedRose {
                 }
             }
 
-            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            if (!itemType.equals(ItemType.SULFURAS)) {
                 item.sellIn = item.sellIn - 1;
             }
 
             if (item.sellIn < 0) {
-                if (!item.name.equals("Aged Brie")) {
-                    if (!item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (!itemType.equals(ItemType.AGED_BRIE)) {
+                    if (!itemType.equals(ItemType.BACKSTAGE)) {
                         if (item.quality > 0) {
-                            if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                                if (item.name.equals("Conjured Mana Cake")) {
+                            if (!itemType.equals(ItemType.SULFURAS)) {
+                                if (itemType.equals(ItemType.CONJURED)) {
                                     item.quality = item.quality - 2;
                                 } else {
                                     item.quality = item.quality - 1;
