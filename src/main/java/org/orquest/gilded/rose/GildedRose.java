@@ -10,6 +10,9 @@ package org.orquest.gilded.rose;
 class GildedRose {
 
     private Item[] items;
+    public final static int MIN_QUALITY = 0;
+    public final static int MAX_QUALITY = 50;
+    public final static int SULFURAS_QUALITY = 80;
 
     public GildedRose(Item[] items) {
         this.items = items;
@@ -28,62 +31,97 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            ItemType itemType = ItemType.findByItemName(item.name);
-            if (!itemType.equals(ItemType.AGED_BRIE) && !itemType.equals(ItemType.BACKSTAGE)) {
-                if (item.quality > 0) {
-                    if (!itemType.equals(ItemType.SULFURAS)) {
-                        if (itemType.equals(ItemType.CONJURED)) {
-                            item.quality = item.quality - 2;
-                        } else {
-                            item.quality = item.quality - 1;
-                        }
-                    }
+            try {
+                ItemType itemType = ItemType.findByItemName(item.name);
+
+                switch (itemType) {
+                    case AGED_BRIE:
+                        updateQualityAgedBrie(item);
+                        break;
+                    case SULFURAS:
+                        updateQualitySulfuras(item);
+                        break;
+                    case BACKSTAGE:
+                        updateQualityBackstage(item);
+                        break;
+                    case CONJURED:
+                        updateQualityConjured(item);
+                        break;
+                    case DEFAULT:
+                        updateQualityNormal(item);
                 }
-            } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-
-                    if (itemType.equals(ItemType.BACKSTAGE)) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!itemType.equals(ItemType.SULFURAS)) {
-                item.sellIn = item.sellIn - 1;
-            }
-
-            if (item.sellIn < 0) {
-                if (!itemType.equals(ItemType.AGED_BRIE)) {
-                    if (!itemType.equals(ItemType.BACKSTAGE)) {
-                        if (item.quality > 0) {
-                            if (!itemType.equals(ItemType.SULFURAS)) {
-                                if (itemType.equals(ItemType.CONJURED)) {
-                                    item.quality = item.quality - 2;
-                                } else {
-                                    item.quality = item.quality - 1;
-                                }
-                            }
-                        }
-                    } else {
-                        item.quality = 0;
-                    }
-                } else {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
-                    }
-                }
+            } catch (ItemTypeException e) {
+                throw new ItemTypeException(String.format("No matching ItemType for " +
+                        "the given item name %s. %s", item.name, e.getMessage()));
             }
         }
     }
+
+
+    private void updateQualityAgedBrie (Item item) {
+        item.sellIn -= 1;
+
+        if (outOfDate(item.sellIn)) {
+            item.quality += 2;
+        } else {
+            item.quality += 1;
+        }
+        checkBasics(item);
+    }
+
+    private void updateQualitySulfuras (Item item) throws ItemTypeException {
+        if (item.quality != SULFURAS_QUALITY) {
+            throw new ItemTypeException(String.format("Sulfuras Legendary item quality " +
+                    "should be %d", SULFURAS_QUALITY));
+        }
+    }
+
+    private void updateQualityBackstage (Item item) {
+        item.sellIn -= 1;
+
+        if (outOfDate(item.sellIn)) {
+            item.quality = 0;
+        } else if (item.sellIn <= 5) {
+            item.quality += 3;
+        } else if (item.sellIn <= 10) {
+            item.quality += 2;
+        }
+        checkBasics(item);
+    }
+
+    private void updateQualityConjured (Item item) {
+        item.sellIn -= 1;
+
+        if (outOfDate(item.sellIn)) {
+            item.quality -= 4;
+        } else {
+            item.quality -= 2;
+        }
+        checkBasics(item);
+    }
+
+    private void updateQualityNormal (Item item) {
+        item.sellIn -= 1;
+
+        if (outOfDate(item.sellIn)) {
+            item.quality -= 2;
+        } else {
+            item.quality -= 1;
+        }
+        checkBasics(item);
+    }
+
+
+    private boolean outOfDate (int days) {
+        return days < 0;
+    }
+
+    private void checkBasics (Item item) {
+        if (item.quality < MIN_QUALITY) {
+            item.quality = MIN_QUALITY;
+        } else if (item.quality > MAX_QUALITY) {
+            item.quality = MAX_QUALITY;
+        }
+    }
+
 }

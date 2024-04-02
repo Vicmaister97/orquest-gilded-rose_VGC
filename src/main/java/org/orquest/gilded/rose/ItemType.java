@@ -33,12 +33,16 @@ public enum ItemType {
      * @param itemName is the name of the Item which we want to obtain it's ItemType
      * @return ItemType value for the corresponding itemName
      */
-    public static ItemType findByItemName (String itemName) {
-        return EnumSet.allOf(ItemType.class)
-                .stream()
-                .filter(itemType -> formatString(itemName).contains(formatString(itemType.getType())))
-                .findFirst()
-                .orElse(DEFAULT);
+    public static ItemType findByItemName (String itemName) throws ItemTypeException {
+        try {
+            return EnumSet.allOf(ItemType.class)
+                    .stream()
+                    .filter(itemType -> formatString(itemName).contains(formatString(itemType.getType())))
+                    .findFirst()
+                    .orElse(DEFAULT);
+        } catch (IllegalArgumentException e) {
+            throw new ItemTypeException(e.getMessage());
+        }
     }
 
     /**
@@ -48,8 +52,15 @@ public enum ItemType {
      * @param original String to be formatted to properly obtain the ItemType of an Item
      * @return String with only alphabet characters in lowercase
      */
-    private static String formatString(String original) {
+    private static String formatString (String original) throws IllegalArgumentException {
+        checkString(original);
         return original.replaceAll("[^a-zA-Z]", "").toLowerCase();
+    }
+
+    private static void checkString (String original) throws IllegalArgumentException {
+        if (original == null || original.isEmpty()) {
+            throw new IllegalArgumentException("Input String cannot be null or empty");
+        }
     }
 
 }

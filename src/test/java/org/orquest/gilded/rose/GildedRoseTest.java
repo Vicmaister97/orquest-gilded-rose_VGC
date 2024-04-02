@@ -164,7 +164,7 @@ public class GildedRoseTest {
         // Then
         assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
         assertEquals(10, backstageItem.sellIn);
-        assertEquals(21, backstageItem.quality);
+        assertEquals(22, backstageItem.quality);
 
         // When
         gildedRose.updateQuality();
@@ -172,14 +172,14 @@ public class GildedRoseTest {
         // Then
         assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
         assertEquals(9, backstageItem.sellIn);
-        assertEquals(23, backstageItem.quality);
+        assertEquals(24, backstageItem.quality);
     }
 
     /**
-     * Tests the updateQuality method for a backstage ticket in the condition of less than 5 days.
+     * Tests the updateQuality method for a backstage ticket in the condition of quality is at max 50
      */
     @Test
-    public void testUpdateQuality_BackstageItemLessThan5Days() {
+    public void testUpdateQuality_BackstageItemMax50() {
         // Given
         int backstageItemIndex = 5;
         Item backstageItem = gildedRose.getItem(backstageItemIndex);
@@ -202,6 +202,32 @@ public class GildedRoseTest {
     }
 
     /**
+     * Tests the updateQuality method for a backstage ticket in the condition of less than 5 days.
+     */
+    @Test
+    public void testUpdateQuality_BackstageItemLessThan5Days() {
+        // Given
+        int backstageItemIndex = 6;
+        Item backstageItem = gildedRose.getItem(backstageItemIndex);
+
+        // When
+        gildedRose.updateQuality();
+
+        // Then
+        assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
+        assertEquals(5, backstageItem.sellIn);
+        assertEquals(23, backstageItem.quality);
+
+        // When
+        gildedRose.updateQuality();
+
+        // Then
+        assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
+        assertEquals(4, backstageItem.sellIn);
+        assertEquals(26, backstageItem.quality);
+    }
+
+    /**
      * Tests the updateQuality method for a backstage ticket in the condition of being out of date.
      */
     @Test
@@ -216,7 +242,7 @@ public class GildedRoseTest {
         // Then
         assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
         assertEquals(5, backstageItem.sellIn);
-        assertEquals(22, backstageItem.quality);
+        assertEquals(23, backstageItem.quality);
 
         // When
         gildedRose.updateQuality();
@@ -224,7 +250,7 @@ public class GildedRoseTest {
         // Then
         assertEquals("Backstage passes to a TAFKAL80ETC concert", backstageItem.name);
         assertEquals(4, backstageItem.sellIn);
-        assertEquals(25, backstageItem.quality);
+        assertEquals(26, backstageItem.quality);
 
         // When
         gildedRose.updateQuality();
