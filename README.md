@@ -2,18 +2,33 @@
 
 Esto es un fork de la conocida [kata de Gilded Rose ](https://github.com/emilybache/GildedRose-Refactoring-Kata/)para simplificar su descarga.
 
-## My simple solution
+## My solution
 
-La solución planteada es la más sencilla posible que modifica lo mínimo el código original.
+La solución planteada es casi la solución final que plantearía.
 
-El planteamiento ha sido tener una solución rápida con las mínimas modificaciones posibles
-que resulta viable en múltiples use cases, véase solucionar un bug, añadir un requerimiento en
-un sistema complejo bien estructurado, etc.
+En este caso, se ha mejorado de forma notable la forma de clasificar los Items (por sus nombres y 
+teniendo solo en cuenta caracteres de a-z y A-Z y una comparación case-insensitive) y se ha tratado de 
+encapsular su lógica por separado dentro de la clase GildedRose. Idealmente y como se describe a 
+continuación, la idea sería encapsular la lógica y atributos necesarios de cada tipo de item en una
+clase diferente que herede y sobreescriba la clase Item.
 
-Se han creado los **tests antes de la implementación del nuevo requerimiento** para
-asegurar que en la modificación del código se mantiene el comportamiento original.
-Ésto también nos asegura que en las sucesivas refactorizaciones de código y su
-ciclo de vida, el comportamiento básico del sistema no se vea alterado de forma inintencionada.
+Como aspectos notables destacar que
+- Se ha tenido en cuenta el manejo de excepciones con una customException llamada ItemTypeException
+- Se ha desarrollado un pipeline en Github para tener un proceso de CI/CD
+- Gestión de versiones con el changelog y generación de TAGs en Github
+- Desarrollo de tests
+
+Dado que no es posible modificar la clase Item, la idea sería crear clases que extiendan de Item, 
+donde cada una de esa clases corresponda con cada uno de los tipos especiales de items que 
+se han planteado (Aged Brie, Sulfuras, Backstage, Conjured y Normal).
+
+La clase Normal en el caso ideal sería modificar e implementar su lógica de updateQuality en la clase
+Item directamente, y que el resto de subclases sobreescriban el método. Además, definiría
+una interfaz que la clase Item implemente donde esté definido al menos ese método updateQuality.
+
+Se ha definido la enumeración ItemType para determinar, a partir del nombre, el tipo del Item
+y llamar a su correspondiente método (y de ésta forma tratar de acercarnos lo máximo posible
+a la definición de clases mencionadas, principios de SRP y encapsulación, etc).
 
 ## Run TESTs
 
